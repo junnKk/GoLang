@@ -31,7 +31,6 @@
         });
     
         todoListItem.on('change', '.checkbox', function() {
-            // ➐ 완료 체크 박스 클릭시
             var id = parseInt($(this).closest("li").attr('id'));
             var name = $(this).closest("li").text();
             var $self = $(this);

@@ -1,4 +1,3 @@
-//ch31/ex31.1/ex31.1.go
 package main
 
 import (
@@ -7,7 +6,6 @@ import (
 	"net/http"
 	"sort"
 	"strconv"
-
 	"github.com/gorilla/mux"
 	"github.com/unrolled/render"
 	"github.com/urfave/negroni"
@@ -15,8 +13,8 @@ import (
 
 var rd *render.Render
 
-type Todo struct { // ❶ 할 일 정보를 담는 Todo 구조체
-	ID        int    `json:"id,omitempty"` // ❷ json 포맷으로 변환 옵션
+type Todo struct { 
+	ID        int    `json:"id,omitempty"`
 	Name      string `json:"name"`
 	Completed bool   `json:"completed,omitempty"`
 }
@@ -24,7 +22,7 @@ type Todo struct { // ❶ 할 일 정보를 담는 Todo 구조체
 var todoMap map[int]Todo
 var lastID int = 0
 
-func MakeWebHandler() http.Handler { // ❸ 웹 서버 핸들러 생성
+func MakeWebHandler() http.Handler { 
 	rd = render.New()
 	todoMap = make(map[int]Todo)
 	mux := mux.NewRouter()
@@ -36,7 +34,7 @@ func MakeWebHandler() http.Handler { // ❸ 웹 서버 핸들러 생성
 	return mux
 }
 
-type Todos []Todo // ❹ ID로 정렬하는 인터페이스
+type Todos []Todo
 
 func (t Todos) Len() int {
 	return len(t)
@@ -56,7 +54,7 @@ func GetTodoListHandler(w http.ResponseWriter, r *http.Request) {
 		list = append(list, todo)
 	}
 	sort.Sort(list)
-	rd.JSON(w, http.StatusOK, list) // ➎ ID로 정렬하여 전체 목록 반환
+	rd.JSON(w, http.StatusOK, list) 
 }
 
 func PostTodoHandler(w http.ResponseWriter, r *http.Request) {
@@ -67,7 +65,7 @@ func PostTodoHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	lastID++ // ➏ 새로운 ID로 등록하고 만든 Todo 반환
+	lastID++ 
 	todo.ID = lastID
 	todoMap[lastID] = todo
 	rd.JSON(w, http.StatusCreated, todo)
@@ -78,7 +76,7 @@ type Success struct {
 }
 
 func RemoveTodoHandler(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r) // ➐ ID에 해당하는 할 일 삭제
+	vars := mux.Vars(r) 
 	id, _ := strconv.Atoi(vars["id"])
 	if _, ok := todoMap[id]; ok {
 		delete(todoMap, id)
@@ -89,7 +87,7 @@ func RemoveTodoHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateTodoHandler(w http.ResponseWriter, r *http.Request) {
-	var newTodo Todo // ➑ ID에 해당하는 할 일 수정
+	var newTodo Todo 
 	err := json.NewDecoder(r.Body).Decode(&newTodo)
 	if err != nil {
 		log.Fatal(err)
@@ -110,7 +108,7 @@ func UpdateTodoHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	m := MakeWebHandler()
-	n := negroni.Classic() // ➒ negroni 기본 핸들러로 감싼다
+	n := negroni.Classic() 
 	n.UseHandler(m)
 
 	log.Println("Started App")
