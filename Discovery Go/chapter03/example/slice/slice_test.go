@@ -122,7 +122,7 @@ func Example_sliceCopy() {
 	if n := copy(dest2, src); n != len(src) {
 		fmt.Println("copy is not completed")
 	}
-	// 2-2. right usage
+	// 2-2. right usage  
 	dest3 := make([]int, len(src))
 	copy(dest3, src)
 	fmt.Println(dest3)
@@ -130,7 +130,6 @@ func Example_sliceCopy() {
 	// 3. using append function
 	dest4 := append([]int(nil), src...)
 	fmt.Println(dest4)
-
 	// Output:
 	// [1 2 3 4 5]
 	// copy is not completed
