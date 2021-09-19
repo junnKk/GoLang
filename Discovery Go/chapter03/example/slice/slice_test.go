@@ -130,6 +130,7 @@ func Example_sliceCopy() {
 	// 3. using append function
 	dest4 := append([]int(nil), src...)
 	fmt.Println(dest4)
+
 	// Output:
 	// [1 2 3 4 5]
 	// copy is not completed
