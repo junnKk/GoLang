@@ -14,6 +14,13 @@ type Task struct {
 	due   *time.Time
 }
 
+//var myTask Task
+//var myTask = Task{"laundry", false, nil}
+//var myTask = Task{
+//	title: "laundry"
+//	done: true,
+//}
+
 type BetterTask struct {
 	title  string
 	status status
@@ -31,6 +38,7 @@ const (
 type ByteSize int
 
 const (
+	// _ = iota //ignore first value
 	KB ByteSize = 1 << (10 * (1 + iota))
 	MB
 	GB
