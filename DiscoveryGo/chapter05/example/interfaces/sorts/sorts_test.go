@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/glowingedge/discoveryGo/chapter5/interfaces/subTask"
+	"github.com/junnkk/golang/discoverygo/chapter05/example/interfaces/subTask"
 )
 
 type CaseInsensitive []string

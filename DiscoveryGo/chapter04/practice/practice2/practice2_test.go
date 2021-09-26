@@ -1,10 +1,7 @@
-package stack
+package practice2
 
 import (
 	"fmt"
-	// "regexp"
-	// "strconv"
-	// "strings"
 )
 
 func ExampleNewEvaluator() {
@@ -44,6 +41,8 @@ func ExampleNewEvaluator() {
 	fmt.Println(eval("2 ** 3 mod 3"))
 	fmt.Println(eval("2 ** 2 ** 3"))
 
+	fmt.Println(eval("2    **  2  ** 3"))
+	fmt.Println(eval("2    **  2  ** errorCase"))
 
 	// Output:
 	// 5
@@ -53,6 +52,7 @@ func ExampleNewEvaluator() {
 	// -9
 	// 2
 	// 256
-
+	// 256
+	// Error occurred
+	// 0
 }
-

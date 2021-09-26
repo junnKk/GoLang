@@ -34,19 +34,19 @@ func FixedPointOfTransform(g Func, transform Transform, guess float64) float64 {
 	return FixedPoint(transform(g), guess)
 }
 
-func Deriv(g Func) Func {
+func Deriv(g Func) Func { // 어떤 함수를 받아서 다른 함수를 돌려주는 형태이기 때문에 Transform의 형태다
 	return func(x float64) float64 {
 		return (g(x+dx) - g(x)) / dx
 	}
 }
 
-func NewtonTransform(g Func) Func {
+func NewtonTransform(g Func) Func { // Transform의 형태다. 뉴턴 방법은 f(x)=0이 되는 x를 찾는 방법 중 하나다. 
 	return func(x float64) float64 {
 		return x - (g(x) / Deriv(g)(x))
 	}
 }
 
-func Sqrt(x float64) float64 {
+func Sqrt(x float64) float64 { // 제곱근 구하는 공식 
 	return FixedPointOfTransform(func(y float64) float64 {
 		return Square(y) - x
 	}, NewtonTransform, 1.0)

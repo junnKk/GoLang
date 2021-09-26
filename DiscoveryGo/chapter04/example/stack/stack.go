@@ -13,7 +13,6 @@ type BinOp func(int, int) int
 // The expression can have +, -, *, /, (, ) operators and
 // decimal integers. Operators and operands should be
 // space delimited.
-// [Refactor - can handle each operator's function]
 func Eval(opMap map[string]BinOp, prec PrecMap, expr string) int {
 	defer func() {
 		if r := recover(); r != nil {
@@ -84,6 +83,7 @@ func NewStrSet(strs ...string) StrSet {
 // Map keyed by operator to set of higher precedence operators
 type PrecMap map[string]StrSet
 
+// 맵을 두 개 받아서 계산기를 돌려주는 함수
 func NewEvaluator(opMap map[string]BinOp, prec PrecMap) func(expr string) int {
 	return func(expr string) int {
 		return Eval(opMap, prec, expr)
