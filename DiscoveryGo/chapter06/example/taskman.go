@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/jaeyeom/gogo/task"
@@ -19,8 +20,6 @@ const (
 	DONE
 )
 
-// String returns the string representation of s. This can be generated
-// by stringer tool, though this function is hand-written.
 func (s status) String() string {
 	switch s {
 	case UNKNOWN:
@@ -92,7 +91,7 @@ func (m *MemoryDataAccess) Put(id ID, t task.Task) error {
 
 // Post adds a new task
 func (m *MemoryDataAccess) Post(t task.Task) (ID, error) {
-	id := m.nextID
+	id :=m.nextID
 	m.nextID++
 	m.tasks[id] = t
 	return id, nil
@@ -157,7 +156,7 @@ const pathPrefix = "/api/v1/task"
 
 func apiHandler(w http.ResponseWriter, r *http.Request) {
 	getID := func() (ID, error) {
-		id := task.ID(r.URL.Path[len(pathPrefix):])
+		id := ID(strconv.Atoi(r.URL.Path[len(pathPrefix):]))
 		if id == "" {
 			return id, errors.New("apiHandler: ID is Empty")
 		}
