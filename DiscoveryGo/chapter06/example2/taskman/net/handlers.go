@@ -7,7 +7,8 @@ import (
 	"net/http"
 	"text/template"
 
-	"github.com/glowingedge/discoveryGo/chapter6/taskman/task"
+	"github.com/jaeyeom/gogo/task"
+
 	"github.com/gorilla/mux"
 )
 

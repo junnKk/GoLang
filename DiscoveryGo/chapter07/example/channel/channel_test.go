@@ -8,18 +8,6 @@ import (
 	"time"
 )
 
-// 이 함수는 영원히 끝나지 않음
-// func Example_simpleChannel3() {
-// 	c := make(chan int)
-// 	go func() {
-// 		c <- 1
-// 		c <- 2
-// 	}()
-// 	fmt.Println(<-c)
-// 	fmt.Println(<-c)
-// 	fmt.Println(<-c)
-// }
-
 func Example_simpleChannel() {
 	c := make(chan int)
 	go func() {

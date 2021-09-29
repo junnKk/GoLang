@@ -12,9 +12,9 @@ import (
 )
 
 var urls = []string{
-	"http://images.freeimages.com/images/previews/587/disco-ball-1421094.jpg",
-	"http://images.freeimages.com/images/previews/2c2/carnival-1434122.jpg",
-	"http://images.freeimages.com/images/previews/43b/orange-smoothie-1-1381411.jpg",
+	"https://cdn.mkhealth.co.kr/news/photo/202102/52163_52859_5928.jpg",
+	"http://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg",
+	"https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-19/s320x320/241410622_242587151207694_3391323637909543013_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_ohc=b2xRRUV4cVQAX-NksJJ&edm=ABfd0MgBAAAA&ccb=7-4&oh=554ca2e8f3269aa95bca9195721ac449&oe=61599398&_nc_sid=7bff83",
 }
 
 func main() {
@@ -23,7 +23,7 @@ func main() {
 	for _, url := range urls {
 		wg.Add(1)
 		go func(url string) {
-			defer wg.Done()
+			defer wg.Done() // 사실상 wg.Add(-1)이라고 보면 됨
 			if _, err := download(url); err != nil {
 				log.Fatal(err)
 			}
