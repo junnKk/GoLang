@@ -5,7 +5,6 @@ import (
 	"sync"
 )
 
-// run with --race option
 func main() {
 	cnt := int64(10)
 	var wg sync.WaitGroup
@@ -18,5 +17,5 @@ func main() {
 		}()
 	}
 	wg.Wait()
-	fmt.Println("cnt:", cnt)
+	fmt.Println(cnt)
 }
