@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
+	"runtime"
 	"sync"
-	"time"
 	// "time"
+	"time"
 )
 
 type IntPipe func(<-chan int) <-chan int
@@ -31,11 +32,13 @@ func Chain(ps ...IntPipe) IntPipe {
 }
 
 func FanOut() {
+	// fmt.Println(runtime.NumCPU())
+	runtime.GOMAXPROCS(1)
 	c := make(chan int)
 	for i := 0; i < 3; i++ {
 		go func(i int) {
 			for n := range c {
-				// time.Sleep(1)
+				time.Sleep(1)
 				fmt.Println(i, n)
 			}
 		}(i)
